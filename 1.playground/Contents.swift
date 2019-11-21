@@ -678,6 +678,6 @@ func toh(numberOfDisks disks: Int, source x: Tower, dest y: Tower, temp z: Tower
     }
 }
 
-let diskNo = 4
+let diskNo = 3
 print("total disks \(diskNo)")
 toh(numberOfDisks: diskNo, source: .Tower1, dest: .Tower3, temp: .Tower2)
