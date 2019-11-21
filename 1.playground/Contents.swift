@@ -1,8 +1,11 @@
 import UIKit
 import Foundation
 
-//MARK : - Sort array
+/*
+ @Siddhesh
+ */
 
+//MARK : - Sort array
 // Initialize the Array
 var a = [3, 1, 2, 4]
 a.sort(by: { $0 < $1 })
@@ -12,11 +15,12 @@ let a2 = [3, 1, 2, 4]
 let result: [Int] = a2.sorted(by: { $0 > $1})
 print(result) // immutable
 
+
 // MARK: - Forced Unwrapping
 //it is done if we know value exists
-
 var a23: Int? = 1
 print(a23!)
+
 
 // MARK : - Nil coelascing operator with ternary operator
 var w = "str2"
@@ -29,7 +33,8 @@ if w == q {
     print(q)
 }
 
-print(b ?? false ? w : q)
+print(b ?? false ? w : q) // ternary operator
+
 
 //MARK :- Int with bitpattern
 let op1: Int = 1
@@ -46,12 +51,15 @@ func add(a1:Int, a2:Int) -> Int{
 
 add(a1: 2, a2: 2)
 
+// converting above function into closure
+// closures used for memory management
 let closure = { (a1:Int, a2: Int) -> Int in
     let b = a1 + a2
     return b
 }
 
 closure(6, 3)
+
 
 // MARK : - Concurrent Queues with NSLock
 var array = [Int]()
@@ -63,8 +71,8 @@ DispatchQueue.concurrentPerform(iterations: 100){ index in
     lk.unlock()
 }
 
-// MARK : - ARC with retain cycles
 
+// MARK : - ARC with retain cycles
 class Vehicle{
     let type: String
     init(type: String) {
@@ -82,6 +90,8 @@ class ViewController: UIViewController{
     var ref1: Vehicle = Vehicle(type: "car")
     var ref2: Vehicle?
 }
+
+
 
 var count: Int = 0
 for i in 0..<100 {
@@ -124,7 +134,6 @@ print(urlComponents.url?.absoluteString)
 
 
 //MARK:-  LinkedList
-
 class Node {
     var value: Int
     var next: Node?
@@ -253,6 +262,7 @@ class LinkedList {
  print(ll.getNode(atPosition: 1)!.value) // Should print 2 now
  print(ll.getNode(atPosition: 2)!.value) // Should print 4 now
  print(ll.getNode(atPosition: 3)!.value) // Should print 3
+
 
 //MARK:-  Stack
 class Stack {
@@ -393,9 +403,6 @@ let stack = Stack(top: n11)
 
 
 //MARK: - Queue
-
-import Foundation
-
 class Queue {
     
     var storage: [Int]
@@ -441,8 +448,8 @@ class Queue {
  q1.enqueue(5)
  print(q1.peek()!) // Should be 5
 
-//Mark: - Binary search
 
+//Mark: - Binary search
 // Return the index in the array, of the desired value
 // If the value can't be found, return nil
 func binarySearch(_ array: [Int], value: Int) -> Int? {
@@ -470,6 +477,7 @@ let testVal2 = 15
 print(binarySearch(testArray, value: testVal1)) // Should be nil
 print(binarySearch(testArray, value: testVal2)!) // Should be 4
 
+
 // MARK: - Fibonacci series
 // Get the fibonacci number at the position in the sequence
 // be sure to check the base case, and recursively call getFib
@@ -495,8 +503,8 @@ print(getFib(9)) // Should be 34
 print(getFib(11)) // Should be 89
 print(getFib(0)) // Should be 0
 
-// Recursion
 
+// Recursion
 func getFib1(_ position: Int) -> Int {
     if position == 0 || position == 1 {
         return position
@@ -512,7 +520,6 @@ print(getFib1(0)) // Should be 0
 
 
 //MARK: - QuickSort
-
 // return the contents of the input array sorted least to greatest
 // create any helper functions you need :)
 // want to get fancy? try making input an "inout" parameter, rather than copying it to "result"
@@ -549,6 +556,7 @@ func quicksort(_ input: [Int], low: Int, high: Int) -> [Int] {
 var testArray1 = [21, 4, 1, 3, 9, 20, 25, 6, 21, 14]
 print(quicksort(testArray1, low: 0, high: testArray1.count - 1))
 
+
 //MARK: - RAJ Sir Questions
 var storedArray = [11,2,24,7,10]
 var sortedArray = storedArray.sorted()
@@ -581,6 +589,7 @@ func printNumberNotInArray(){
 printNumberNotInArray()
 
 // MARK: - Bubble sort
+
 func bubbleSort(){
     for _ in 0..<storedArray.count{
         for j in 1..<storedArray.count{
@@ -593,6 +602,7 @@ func bubbleSort(){
 }
 
 bubbleSort()
+
 
 // MARK: - Merge sort with Generics
 func mergeSort<T: Comparable>(_ array: [T]) -> [T] {
@@ -647,7 +657,6 @@ mergeSort(storedArray)
 
 
 //MARK: - Dictionaries
-
 var locations = ["North America" : ["USA" : ["Mountain View"]]]
 
 locations["North America"]?["USA"]?.append("Atlanta")
@@ -661,8 +670,9 @@ for city in sortedLocation! {
     print(city)
 }
 
-//MARK:- Tower of Hanoi
 
+//MARK:- Ijhar sir question
+//Tower of Hanoi
 enum Tower: String{
     case Tower1 = "Tower 1"
     case Tower2 = "Tower 2"
