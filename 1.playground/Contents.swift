@@ -554,22 +554,36 @@ var storedArray = [11,2,24,7,10]
 var sortedArray = storedArray.sorted()
 var resArray = [Int]()
 
+// with for loop
 for i in sortedArray[0]..<sortedArray[sortedArray.count - 1]{
-    if sortedArray.contains(i) {
-//        print(sortedArray)
-    }else{
+    if !sortedArray.contains(i) {
         resArray.append(i)
-        print(resArray)
+        print("resArray: \(resArray)")
     }
 }
 
+// without using for loop
+var lowerValue = sortedArray[0]
+var resArrayNew = [Int]()
+
+func printNumberNotInArray(){
+    if (lowerValue < sortedArray[sortedArray.count - 1]){
+        if !sortedArray.contains(lowerValue) {
+            resArrayNew.append(lowerValue)
+            print(lowerValue)
+        }
+        lowerValue += 1
+        print("resArrayNew: -> \(resArrayNew)")
+        printNumberNotInArray()
+    }
+}
+
+printNumberNotInArray()
 
 // MARK: - Bubble sort
 func bubbleSort(){
-    for i in 0..<storedArray.count{
+    for _ in 0..<storedArray.count{
         for j in 1..<storedArray.count{
-            print("i \(i)")
-            print("j \(j)")
             if storedArray[j - 1] > storedArray[j]{
                 storedArray.swapAt(j - 1, j)
             }
@@ -579,3 +593,91 @@ func bubbleSort(){
 }
 
 bubbleSort()
+
+// MARK: - Merge sort with Generics
+func mergeSort<T: Comparable>(_ array: [T]) -> [T] {
+    guard array.count > 1 else { return array }
+    
+    let middleIndex = array.count / 2
+    
+    let leftArray = mergeSort(Array(array[0..<middleIndex]))
+    let rightArray = mergeSort(Array(array[middleIndex..<array.count]))
+    
+    return merge(leftArray, rightArray)
+}
+
+func merge<T: Comparable>(_ left: [T], _ right: [T]) -> [T] {
+    var leftIndex = 0
+    var rightIndex = 0
+    
+    var orderedArray: [T] = []
+    
+    while leftIndex < left.count && rightIndex < right.count {
+        let leftElement = left[leftIndex]
+        let rightElement = right[rightIndex]
+        
+        if leftElement < rightElement {
+            orderedArray.append(leftElement)
+            leftIndex += 1
+        } else if leftElement > rightElement {
+            orderedArray.append(rightElement)
+            rightIndex += 1
+        } else {
+            orderedArray.append(leftElement)
+            leftIndex += 1
+            orderedArray.append(rightElement)
+            rightIndex += 1
+        }
+    }
+    
+    while leftIndex < left.count {
+        orderedArray.append(left[leftIndex])
+        leftIndex += 1
+    }
+    
+    while rightIndex < right.count {
+        orderedArray.append(right[rightIndex])
+        rightIndex += 1
+    }
+    
+    return orderedArray
+}
+
+mergeSort(storedArray)
+
+
+//MARK: - Dictionaries
+
+var locations = ["North America" : ["USA" : ["Mountain View"]]]
+
+locations["North America"]?["USA"]?.append("Atlanta")
+locations["Asia"] = ["India" : ["Bangalore"]]
+locations["Asia"]?["China"] = ["Shanghai"]
+locations["Africa"] = ["Egypt" : ["Cairo"]]
+
+let sortedLocation = locations["North America"]?["USA"]?.sorted()
+
+for city in sortedLocation! {
+    print(city)
+}
+
+//MARK:- Tower of Hanoi
+
+enum Tower: String{
+    case Tower1 = "Tower 1"
+    case Tower2 = "Tower 2"
+    case Tower3 = "Tower 3"
+
+}
+
+func toh(numberOfDisks disks: Int, source x: Tower, dest y: Tower, temp z: Tower){
+    if (disks > 0){
+        toh(numberOfDisks: disks - 1, source: x, dest: z, temp: y)
+        print("Moved disk \(disks) from \(x.rawValue) to \(y.rawValue)")
+        toh(numberOfDisks: disks - 1, source: z, dest: y, temp: x)
+    }
+}
+
+let diskNo = 4
+print("total disks \(diskNo)")
+toh(numberOfDisks: diskNo, source: .Tower1, dest: .Tower3, temp: .Tower2)
